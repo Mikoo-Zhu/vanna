@@ -1173,9 +1173,9 @@ class VannaFlaskApp(VannaFlaskAPI):
         auth: AuthInterface = NoAuth(),
         debug=True,
         allow_llm_to_see_data=False,
-        logo="https://img.vanna.ai/vanna-flask.svg",
-        title="Welcome to Vanna.AI",
-        subtitle="Your AI-powered copilot for SQL queries.",
+        logo="/chatdata.svg",
+        title="Welcome to ChatData",
+        subtitle="AI-powered copilot for SQL queries.",
         show_training_data=True,
         suggested_questions=True,
         sql=True,
@@ -1201,7 +1201,7 @@ class VannaFlaskApp(VannaFlaskAPI):
             debug: Show the debug console. Defaults to True.
             allow_llm_to_see_data: Whether to allow the LLM to see data. Defaults to False.
             logo: The logo to display in the UI. Defaults to the Vanna logo.
-            title: The title to display in the UI. Defaults to "Welcome to Vanna.AI".
+            title: The title to display in the UI. Defaults to "Welcome to ChatData".
             subtitle: The subtitle to display in the UI. Defaults to "Your AI-powered copilot for SQL queries.".
             show_training_data: Whether to show the training data in the UI. Defaults to True.
             suggested_questions: Whether to show suggested questions in the UI. Defaults to True.
@@ -1291,6 +1291,20 @@ class VannaFlaskApp(VannaFlaskAPI):
                 return Response(response.content, response.status_code, headers)
             else:
                 return "Error fetching file from remote server", response.status_code
+
+        @self.flask_app.route("/chatdata.svg")
+        def custom_chatdata_svg():
+            # 自定义的SVG图标代码
+            svg_content = '''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+  <circle cx="30" cy="30" r="28" fill="#4A86E8" />
+  <path d="M15 20C15 17.7909 16.7909 16 19 16H41C43.2091 16 45 17.7909 45 20V36C45 38.2091 43.2091 40 41 40H19C16.7909 40 15 38.2091 15 36V20Z" fill="white"/>
+  <rect x="19" y="22" width="22" height="2" rx="1" fill="#4A86E8"/>
+  <rect x="19" y="27" width="18" height="2" rx="1" fill="#4A86E8"/>
+  <rect x="19" y="32" width="14" height="2" rx="1" fill="#4A86E8"/>
+  <path d="M15 44C15 42.8954 15.8954 42 17 42H43C44.1046 42 45 42.8954 45 44C45 45.1046 44.1046 46 43 46H17C15.8954 46 15 45.1046 15 44Z" fill="white"/>
+</svg>'''
+            return Response(svg_content, mimetype="image/svg+xml")
 
         @self.flask_app.route("/", defaults={"path": ""})
         @self.flask_app.route("/<path:path>")
