@@ -1174,7 +1174,7 @@ class VannaFlaskApp(VannaFlaskAPI):
         debug=True,
         allow_llm_to_see_data=False,
         logo="/chatdata.svg",
-        title="Welcome to ChatData",
+        title='Welcome to ChatData',
         subtitle="AI-powered copilot for SQL queries.",
         show_training_data=True,
         suggested_questions=True,

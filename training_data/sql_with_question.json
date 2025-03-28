@@ -1,0 +1,82 @@
+[
+  {
+    "question": "查询e5b品牌订单数据",
+    "answer": "SELECT order_no, order_time, sales, item_qty FROM public.new_fact_order_detail WHERE brand_code = 'ABC'"
+  },
+  {
+    "question": "按订单日期范围查询销售数据",
+    "answer": "SELECT order_no, order_date, sales, channel FROM public.new_fact_order_detail WHERE order_date BETWEEN '2025-01-01' AND '2025-03-31'"
+  },
+  {
+    "question": "计算每个省份的总销售额",
+    "answer": "SELECT province_name, SUM(sales) AS total_sales FROM public.new_fact_order_detail GROUP BY province_name"
+  },
+  {
+    "question": "查询活跃会员的订单数量",
+    "answer": "SELECT merged_c_code, tier_code, COUNT(order_no) AS total_orders FROM public.new_fact_order_detail WHERE is_mtd_active_member_flag = 1 GROUP BY merged_c_code, tier_code"
+  },
+  {
+    "question": "查询特定门店的订单详细信息",
+    "answer": "SELECT order_no, item_qty, item_price, terminal_name FROM public.new_fact_order_detail WHERE store_no = 'S123'"
+  },
+  {
+    "question": "按商品代码筛选订单",
+    "answer": "SELECT order_no, material_code, material_name_cn, item_qty FROM public.new_fact_order_detail WHERE material_code = 'P123'"
+  },
+  {
+    "question": "查找销售额大于500的订单",
+    "answer": "SELECT order_no, sales, order_date, channel FROM public.new_fact_order_detail WHERE sales > 500"
+  },
+  {
+    "question": "按省份分组查询订单数量",
+    "answer": "SELECT province_name, COUNT(order_no) AS order_count FROM public.new_fact_order_detail GROUP BY province_name"
+  },
+  {
+    "question": "获取特定顾客的订单详情",
+    "answer": "SELECT order_no, item_qty, sales, order_date FROM public.new_fact_order_detail WHERE merged_c_code = 'C001'"
+  },
+  {
+    "question": "获取某个城市的订单详情",
+    "answer": "SELECT order_no, sales, channel, item_qty FROM public.new_fact_order_detail WHERE line_city_name = 'Beijing'"
+  },
+  {
+    "question": "统计每个会员等级的总销售额",
+    "answer": "SELECT tier_code, SUM(sales) AS total_sales FROM public.new_fact_order_detail GROUP BY tier_code"
+  },
+  {
+    "question": "按日期查询每个商品的销售数据",
+    "answer": "SELECT material_code, material_name_cn, sales, order_date FROM public.new_fact_order_detail WHERE order_date = '2025-03-01'"
+  },
+  {
+    "question": "查询特定渠道的销售额",
+    "answer": "SELECT channel, SUM(sales) AS total_sales FROM public.new_fact_order_detail WHERE channel = 'Online' GROUP BY channel"
+  },
+  {
+    "question": "计算每个门店的订单总数",
+    "answer": "SELECT terminal_name, COUNT(order_no) AS order_count FROM public.new_fact_order_detail GROUP BY terminal_name"
+  },
+  {
+    "question": "获取退单数据",
+    "answer": "SELECT order_no, sales, item_qty FROM public.new_fact_order_detail WHERE order_type = 2"
+  },
+  {
+    "question": "根据客户的活跃状态查询订单数据",
+    "answer": "SELECT merged_c_code, order_no, sales, item_qty FROM public.new_fact_order_detail WHERE is_mtd_active_member_flag = 1"
+  },
+  {
+    "question": "按城市等级分组查询销售总额",
+    "answer": "SELECT line_city_level, SUM(sales) AS total_sales FROM public.new_fact_order_detail GROUP BY line_city_level"
+  },
+  {
+    "question": "查询特定产品类型的订单",
+    "answer": "SELECT order_no, material_type, sales FROM public.new_fact_order_detail WHERE material_type = 'Electronics'"
+  },
+  {
+    "question": "统计每月的销售额",
+    "answer": "SELECT EXTRACT(MONTH FROM order_date) AS month, SUM(sales) AS total_sales FROM public.new_fact_order_detail GROUP BY EXTRACT(MONTH FROM order_date)"
+  },
+  {
+    "question": "查询特定城市的活跃客户数量",
+    "answer": "SELECT line_city_name, COUNT(DISTINCT merged_c_code) AS active_customers FROM public.new_fact_order_detail WHERE is_mtd_active_member_flag = 1 GROUP BY line_city_name"
+  }
+] 

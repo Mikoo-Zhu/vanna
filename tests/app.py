@@ -24,8 +24,8 @@ class DeepseekLLM(VannaBase):
 
         # 从环境变量获取API密钥
         api_key = config.get("api_key") or os.environ.get("API_KEY")
-        model = config.get("model") or os.environ.get("LLM_MODEL", "deepseek-v3-baidu")
-        base_url = config.get("base_url") or os.environ.get("LLM_BASE_URL", "https://api.302.ai/v1")
+        model = config.get("model") or os.environ.get("LLM_MODEL", "deepseek/deepseek-chat-v3-0324:free")
+        base_url = config.get("base_url") or os.environ.get("LLM_BASE_URL", "https://openrouter.ai/api/v1")
 
         if not api_key:
             raise ValueError("必须提供 Deepseek api_key，可通过配置或环境变量 API_KEY 设置")
@@ -65,7 +65,13 @@ class MyVanna(ChromaDB_VectorStore, DeepseekLLM):
         DeepseekLLM.__init__(self, config=config)
 
 # 从环境变量获取配置
-vn = MyVanna()
+config = {
+    "path": "./chroma_db",  # 与train_data.py使用相同的ChromaDB存储路径
+    "api_key": os.environ.get("API_KEY"),
+    "model": os.environ.get("LLM_MODEL", "deepseek/deepseek-chat-v3-0324:free"),
+    "base_url": os.environ.get("LLM_BASE_URL", "https://openrouter.ai/api/v1")
+}
+vn = MyVanna(config=config)
 
 # 2. (可选) 连接数据库
 vn.connect_to_postgres(host='localhost', dbname='postgres', user='postgres', password='123456', port='5432')
