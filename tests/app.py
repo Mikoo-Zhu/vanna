@@ -65,11 +65,17 @@ class MyVanna(ChromaDB_VectorStore, DeepseekLLM):
         DeepseekLLM.__init__(self, config=config)
 
 # 从环境变量获取配置
+# config = {
+#     "path": "./chroma_db",  # 与train_data.py使用相同的ChromaDB存储路径
+#     "api_key": os.environ.get("API_KEY"),
+#     "model": os.environ.get("LLM_MODEL", "deepseek/deepseek-chat-v3-0324:free"),
+#     "base_url": os.environ.get("LLM_BASE_URL", "https://openrouter.ai/api/v1")
+# }
 config = {
     "path": "./chroma_db",  # 与train_data.py使用相同的ChromaDB存储路径
     "api_key": os.environ.get("API_KEY"),
-    "model": os.environ.get("LLM_MODEL", "deepseek/deepseek-chat-v3-0324:free"),
-    "base_url": os.environ.get("LLM_BASE_URL", "https://openrouter.ai/api/v1")
+    "model": os.environ.get("LLM_MODEL", "deepseek-v3"),
+    "base_url": os.environ.get("LLM_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1")
 }
 vn = MyVanna(config=config)
 
